@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-
-import 'Screens/OpenScreen.dart';
+import 'Screens/opening.dart';
+import 'Screens/login.dart';
 
 void main() {
   runApp(const OurQuizzApp());
@@ -13,7 +13,7 @@ class OurQuizzApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginScreen(),
+      home: OpeningScreen(),
     );
   }
 }
