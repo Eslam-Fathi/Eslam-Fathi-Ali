@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:iti_flutter/quiz.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -10,8 +11,8 @@ class LoginScreen extends StatelessWidget {
       body: SafeArea(
         child: Stack(
           children: [
-            Image.network(
-              'https://fiasco.design/wp-content/uploads/2022/09/how-we-use-figma-to-improve-our-creative-process-3-1920x1014.png',
+            Image.asset(
+              'images/QUIZZATO-white-logo.png',
               fit: BoxFit.cover,
               width: double.infinity,
               height: double.infinity,
@@ -86,7 +87,7 @@ class LoginScreen extends StatelessWidget {
                                   'Register',
                                   style: TextStyle(
                                     fontSize: 16,
-                                    color: Color.fromARGB(255, 24, 12, 192),
+                                    color: Color.fromARGB(255, 255, 87, 34),
                                   ),
                                 ),
                               ),
@@ -94,10 +95,15 @@ class LoginScreen extends StatelessWidget {
                           ),
                           const SizedBox(height: 16),
                           ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => Quiz()),
+                              );
+                            },
                             style: ButtonStyle(
                               backgroundColor: MaterialStateProperty.all<Color>(
-                                  const Color.fromARGB(255, 24, 12, 192)),
+                                  const Color.fromARGB(255, 255, 87, 34)),
                               shape: MaterialStateProperty.all<
                                   RoundedRectangleBorder>(
                                 RoundedRectangleBorder(
@@ -121,7 +127,7 @@ class LoginScreen extends StatelessWidget {
                       const SizedBox(height: 16),
                       const Icon(
                         Icons.fingerprint,
-                        color: Color.fromARGB(255, 24, 12, 192),
+                        color: Color.fromARGB(255, 255, 87, 34),
                         size: 80,
                       ),
                       Row(
@@ -147,7 +153,7 @@ class LoginScreen extends StatelessWidget {
                               style: GoogleFonts.lato(
                                 textStyle: const TextStyle(
                                   fontSize: 16,
-                                  color: Color.fromARGB(255, 24, 12, 192),
+                                  color: Color.fromARGB(255, 255, 87, 34),
                                 ),
                               ),
                             ),
@@ -165,4 +171,3 @@ class LoginScreen extends StatelessWidget {
     );
   }
 }
-//Task2
