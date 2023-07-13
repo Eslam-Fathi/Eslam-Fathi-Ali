@@ -85,6 +85,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 vertical: 16, horizontal: 10),
                           ),
                           validator: (value) {
+                            // validation
                             if (value == null || value.isEmpty) {
                               return 'Please enter your username';
                             } else if (value.length < 9) {
