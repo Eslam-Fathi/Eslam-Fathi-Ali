@@ -12,12 +12,11 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
 
   @override
   void dispose() {
     _emailController.dispose();
-    _passwordController.dispose();
+
     super.dispose();
   }
 
@@ -85,17 +84,19 @@ class _LoginScreenState extends State<LoginScreen> {
                                 vertical: 16, horizontal: 10),
                           ),
                           validator: (value) {
+                            // validation
                             if (value == null || value.isEmpty) {
-                              return 'Please enter an email';
-                            } else if (!value.contains('@')) {
-                              return 'Please enter a valid email';
+                              return 'Please enter your username';
+                            } else if (value.length < 9) {
+                              return 'Username must be at least 9 characters long';
+                            } else if (!RegExp(r'^[A-Z]').hasMatch(value)) {
+                              return 'Username must start with an uppercase letter';
                             }
                             return null;
                           },
                         ),
                         const SizedBox(height: 30),
                         TextFormField(
-                          controller: _passwordController,
                           obscureText: true,
                           decoration: InputDecoration(
                             labelText: 'Password',
@@ -150,7 +151,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 child: Text(
                                   'Login',
                                   style: TextStyle(
-                                    fontSize: 18,
+                                    fontSize: 19,
                                   ),
                                 ),
                               ),
