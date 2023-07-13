@@ -86,9 +86,11 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Please enter an email';
-                            } else if (!value.contains('@')) {
-                              return 'Please enter a valid email';
+                              return 'Please enter your username';
+                            } else if (value.length < 9) {
+                              return 'Username must be at least 9 characters long';
+                            } else if (!RegExp(r'^[A-Z]').hasMatch(value)) {
+                              return 'Username must start with an uppercase letter';
                             }
                             return null;
                           },
