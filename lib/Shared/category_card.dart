@@ -5,15 +5,13 @@ import 'package:iti_flutter/quiz.dart';
 class CatCard extends StatelessWidget {
   final String? testName;
   final Color? cardColor;
-  final Function()? onTabFunction;
 
-  const CatCard({this.testName, this.cardColor, this.onTabFunction});
+  const CatCard({this.testName, this.cardColor});
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: InkWell(
-        onTap: onTabFunction,
         child: Container(
           color: cardColor,
           child: Center(
