@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'package:iti_flutter/answer_button.dart';
+import 'package:iti_flutter/Shared/answer_button.dart';
 import 'package:iti_flutter/data/questions.dart';
 
 class QuestionsScreen extends StatefulWidget {
@@ -35,9 +35,25 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
 
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          IconButton(
+            icon: Container(
+              height: 100,
+              width: 100,
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('images/QUIZZATO-logo.png'),
+                  fit: BoxFit.contain,
+                ),
+              ),
+              child: const SizedBox(),
+            ),
+            onPressed: () {},
+          ),
+        ],
         backgroundColor: Colors.deepOrangeAccent,
         title: const Text(
-          "Hello Flutter",
+          "Hello Flutter!",
         ),
       ),
       body: Container(

@@ -68,7 +68,10 @@ class ResultsScreen extends StatelessWidget {
               height: 20,
             ),
             TextButton.icon(
-              onPressed: onRestart,
+              onPressed: () {
+                onRestart();
+                chosenAnswers.clear();
+              },
               style: TextButton.styleFrom(
                 foregroundColor: Colors.black,
               ),
