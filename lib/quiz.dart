@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-
 import 'package:iti_flutter/Screens/start_screen.dart';
 import 'package:iti_flutter/Screens/questions_screen.dart';
 import 'package:iti_flutter/data/questions.dart';
 import 'package:iti_flutter/Screens/results_screen.dart';
+import 'package:iti_flutter/Screens/cat_screen.dart';
 
 class Quiz extends StatefulWidget {
   const Quiz({super.key});
@@ -15,7 +15,7 @@ class Quiz extends StatefulWidget {
 }
 
 class _QuizState extends State<Quiz> {
-  List<String> _selectedAnswers = [];
+  final List<String> _selectedAnswers = [];
   var _activeScreen = 'start-screen';
 
   void _switchScreen() {
@@ -36,13 +36,17 @@ class _QuizState extends State<Quiz> {
 
   void restartQuiz() {
     setState(() {
-      _activeScreen = 'questions-screen';
+      _activeScreen = 'cat-screen';
     });
   }
 
   @override
   Widget build(context) {
     Widget screenWidget = StartScreen(_switchScreen);
+
+    if (_activeScreen == 'cat-screen') {
+      screenWidget = const CategoryScreen();
+    }
 
     if (_activeScreen == 'questions-screen') {
       screenWidget = QuestionsScreen(
@@ -61,16 +65,6 @@ class _QuizState extends State<Quiz> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                Color.fromARGB(255, 78, 13, 151),
-                Color.fromARGB(255, 107, 15, 168),
-              ],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-          ),
           child: screenWidget,
         ),
       ),

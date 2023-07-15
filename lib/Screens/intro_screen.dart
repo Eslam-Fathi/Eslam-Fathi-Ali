@@ -27,12 +27,14 @@ class IntroScreen extends StatelessWidget {
                 const Spacer(),
                 Container(
                   width: double.infinity,
-                  margin: EdgeInsets.symmetric(vertical: 28, horizontal: 26),
+                  margin:
+                      const EdgeInsets.symmetric(vertical: 28, horizontal: 26),
                   child: ElevatedButton(
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => LoginScreen()),
+                        MaterialPageRoute(
+                            builder: (context) => const LoginScreen()),
                       );
                     },
                     style: ButtonStyle(

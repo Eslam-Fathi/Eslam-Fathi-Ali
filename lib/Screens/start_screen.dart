@@ -32,7 +32,7 @@ class StartScreen extends StatelessWidget {
             OutlinedButton.icon(
               onPressed: startQuiz,
               style: OutlinedButton.styleFrom(
-                elevation: .5,
+                elevation: .9,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(11),
                 ),
