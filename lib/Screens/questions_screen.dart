@@ -44,6 +44,18 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
             ),
           ],
         ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 10.0),
+            child: GestureDetector(
+              child: Image.asset(
+                'images/QUIZZATO-logo.png',
+                width: 60.0,
+                height: 60.0,
+              ),
+            ),
+          ),
+        ],
       ),
       body: Container(
         decoration: const BoxDecoration(
