@@ -1,85 +1,73 @@
 import 'package:flutter/material.dart';
-import 'package:iti_flutter/data/questions.dart';
-import 'package:iti_flutter/questions_summary/questions_summary.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../Screens/login_screen.dart';
+import '../Screens/intro_screen.dart';
 
-class ResultsScreen extends StatelessWidget {
-  const ResultsScreen({
-    Key? key,
-    required this.chosenAnswers,
-    required this.onRestart,
-  }) : super(key: key);
-
-  final void Function() onRestart;
-  final List<String> chosenAnswers;
-
-  List<Map<String, Object>> get summaryData {
-    final List<Map<String, Object>> summary = [];
-
-    for (var i = 0; i < chosenAnswers.length; i++) {
-      summary.add(
-        {
-          'question_index': i,
-          'question': questions[i].text,
-          'correct_answer': questions[i].answers[0],
-          'user_answer': chosenAnswers[i]
-        },
-      );
-    }
-
-    return summary;
-  }
+class ResultScreen extends StatelessWidget {
+  final int index;
+  final int score;
+  const ResultScreen({Key? key, required this.index, required this.score})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final numTotalQuestions = questions.length;
-    final numCorrectQuestions = summaryData
-        .where(
-          (data) => data['user_answer'] == data['correct_answer'],
-        )
-        .length;
-
-    return Container(
-      decoration: const BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('images/QUIZZATO-BG.png'),
-          fit: BoxFit.cover,
-        ),
-      ),
-      child: Container(
-        margin: const EdgeInsets.all(40),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'You answered $numCorrectQuestions out of $numTotalQuestions questions correctly!',
-              style: GoogleFonts.lato(
-                color: Colors.black,
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
+    return Scaffold(
+      body: Stack(
+        children: [
+          Positioned.fill(
+            child: Image.asset(
+              'images/QUIZZATO-BG.png',
+              fit: BoxFit.cover,
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.all(30),
+            child: Center(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  RichText(
+                    text: TextSpan(
+                      text: 'Hello ',
+                      style: const TextStyle(fontSize: 20, color: Colors.black),
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: userNameController.text,
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                              color: Color.fromARGB(255, 33, 11, 224)),
+                        ),
+                        const TextSpan(
+                          text: ', your Score is ',
+                        ),
+                        TextSpan(
+                          text: '$score /${index + 1} ',
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                              color: Color.fromARGB(255, 33, 11, 224)),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  TextButton.icon(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const IntroScreen(),
+                        ),
+                      );
+                    },
+                    icon: const Icon(Icons.refresh),
+                    label: const Text('Restart!'),
+                  ),
+                ],
               ),
-              textAlign: TextAlign.center,
             ),
-            const SizedBox(
-              height: 20,
-            ),
-            QuestionsSummary(summaryData),
-            const SizedBox(
-              height: 20,
-            ),
-            TextButton.icon(
-              onPressed: () {
-                onRestart();
-                chosenAnswers.clear();
-              },
-              style: TextButton.styleFrom(
-                foregroundColor: Colors.black,
-              ),
-              icon: const Icon(Icons.refresh),
-              label: const Text('Restart Quiz!'),
-            )
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
