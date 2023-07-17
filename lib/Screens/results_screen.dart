@@ -53,7 +53,7 @@ class ResultScreen extends StatelessWidget {
                   const SizedBox(height: 20),
                   TextButton.icon(
                     onPressed: () {
-                      Navigator.push(
+                      Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
                           builder: (context) => const IntroScreen(),

@@ -44,7 +44,7 @@ class CategoryScreen extends StatelessWidget {
           testName: "Flutter Test",
           cardColor: const Color.fromARGB(201, 71, 8, 197),
           onTabFunction: () {
-            Navigator.push(
+            Navigator.pushReplacement(
               context,
               MaterialPageRoute(
                   builder: (context) => QuestionsScreen(

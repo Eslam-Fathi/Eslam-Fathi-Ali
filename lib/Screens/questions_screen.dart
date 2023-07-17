@@ -44,15 +44,6 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
             ),
           ],
         ),
-        actions: const [
-          Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Icon(
-              Icons.local_parking_outlined,
-              color: Colors.orange,
-            ),
-          )
-        ],
       ),
       body: Container(
         decoration: const BoxDecoration(
@@ -93,7 +84,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                         as int;
 
                     if (index == widget.questionsList.length - 1) {
-                      Navigator.push(
+                      Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
                             builder: (context) => ResultScreen(

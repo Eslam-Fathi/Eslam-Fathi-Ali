@@ -115,7 +115,7 @@ class LoginScreen extends StatelessWidget {
                             ElevatedButton(
                               onPressed: () {
                                 if (_loginFormKey.currentState!.validate()) {
-                                  Navigator.push(
+                                  Navigator.pushReplacement(
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
