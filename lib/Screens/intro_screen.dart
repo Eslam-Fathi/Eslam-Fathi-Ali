@@ -31,7 +31,7 @@ class IntroScreen extends StatelessWidget {
                       const EdgeInsets.symmetric(vertical: 28, horizontal: 26),
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.push(
+                      Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(builder: (context) => LoginScreen()),
                       );
