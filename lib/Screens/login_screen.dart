@@ -3,33 +3,12 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'package:iti_flutter/Screens/cat_screen.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+TextEditingController userNameController = TextEditingController();
 
-  @override
-  LoginScreenState createState() => LoginScreenState();
-}
+class LoginScreen extends StatelessWidget {
+  LoginScreen({super.key});
 
-class LoginScreenState extends State<LoginScreen> {
-  final _formKey = GlobalKey<FormState>();
-  final _emailController = TextEditingController();
-
-  @override
-  void dispose() {
-    _emailController.dispose();
-
-    super.dispose();
-  }
-
-  void _submitForm() {
-    if (_formKey.currentState!.validate()) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const CategoryScreen()),
-      );
-    }
-  }
-
+  final _loginFormKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,7 +37,7 @@ class LoginScreenState extends State<LoginScreen> {
                 child: Padding(
                   padding: const EdgeInsets.all(20),
                   child: Form(
-                    key: _formKey,
+                    key: _loginFormKey,
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -75,7 +54,7 @@ class LoginScreenState extends State<LoginScreen> {
                         ),
                         const SizedBox(height: 30),
                         TextFormField(
-                          controller: _emailController,
+                          controller: userNameController,
                           decoration: InputDecoration(
                             labelText: 'Email',
                             border: OutlineInputBorder(
@@ -134,7 +113,16 @@ class LoginScreenState extends State<LoginScreen> {
                             ),
                             const SizedBox(height: 16),
                             ElevatedButton(
-                              onPressed: _submitForm,
+                              onPressed: () {
+                                if (_loginFormKey.currentState!.validate()) {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const CategoryScreen()),
+                                  );
+                                }
+                              },
                               style: ButtonStyle(
                                 backgroundColor:
                                     MaterialStateProperty.all<Color>(
@@ -163,7 +151,7 @@ class LoginScreenState extends State<LoginScreen> {
                         const Icon(
                           Icons.fingerprint,
                           color: Color.fromARGB(255, 255, 87, 34),
-                          size: 80,
+                          size: 65,
                         ),
                         Row(
                           children: [

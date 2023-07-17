@@ -1,60 +1,58 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import 'package:iti_flutter/Shared/answer_button.dart';
-import 'package:iti_flutter/data/questions.dart';
+import '../Shared/answer_button.dart';
+import '../Screens/results_screen.dart';
 
 class QuestionsScreen extends StatefulWidget {
-  const QuestionsScreen({
-    super.key,
-    required this.onSelectAnswer,
-  });
+  final Color? themeColor;
+  final String? testName;
+  final List questionsList;
 
-  final void Function(String answer) onSelectAnswer;
+  const QuestionsScreen(
+      {super.key, this.themeColor, this.testName, required this.questionsList});
 
   @override
-  State<QuestionsScreen> createState() {
-    return _QuestionsScreenState();
-  }
+  State<QuestionsScreen> createState() => _QuestionsScreenState();
 }
 
 class _QuestionsScreenState extends State<QuestionsScreen> {
-  var currentQuestionIndex = 0;
-
-  void answerQuestion(String selectedAnswer) {
-    widget.onSelectAnswer(selectedAnswer);
-
-    setState(() {
-      currentQuestionIndex++;
-    });
-  }
+  int index = 0;
+  int score = 0;
 
   @override
-  Widget build(context) {
-    final currentQuestion = questions[currentQuestionIndex];
-
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: [
-          IconButton(
-            icon: Container(
-              height: 100,
-              width: 100,
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('images/QUIZZATO-logo.png'),
-                  fit: BoxFit.contain,
-                ),
-              ),
-              child: const SizedBox(),
+        backgroundColor: widget.themeColor,
+        leadingWidth: 100,
+        centerTitle: true,
+        automaticallyImplyLeading: false,
+        leading: Center(
+            child: Text(
+          widget.testName!,
+          style: const TextStyle(color: Colors.black),
+        )),
+        title: Column(
+          children: [
+            const Text(
+              "Question No:",
+              style: TextStyle(color: Colors.black),
             ),
-            onPressed: () {},
-          ),
-        ],
-        backgroundColor: Colors.deepOrangeAccent,
-        title: const Text(
-          "Hello Flutter!",
+            Text(
+              "${index + 1}/${widget.questionsList.length}",
+              style: const TextStyle(color: Colors.black),
+            ),
+          ],
         ),
+        actions: const [
+          Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Icon(
+              Icons.local_parking_outlined,
+              color: Colors.orange,
+            ),
+          )
+        ],
       ),
       body: Container(
         decoration: const BoxDecoration(
@@ -65,28 +63,51 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
         ),
         child: Container(
           margin: const EdgeInsets.all(40),
+          width: double.infinity,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Text(
-                currentQuestion.text,
-                style: GoogleFonts.lato(
-                  color: Colors.black,
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
+              Expanded(
+                child: Text(
+                  widget.questionsList[index]["question"],
+                  style: GoogleFonts.lato(
+                    color: Colors.black,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  textAlign: TextAlign.center,
                 ),
-                textAlign: TextAlign.center,
               ),
-              const SizedBox(height: 30),
-              ...currentQuestion.shuffledAnswers.map((answer) {
-                return AnswerButton(
-                  answerText: answer,
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.02,
+              ),
+              for (int i = 0;
+                  i < (widget.questionsList[index]["answers"] as List).length;
+                  i++)
+                AnswerButton(
+                  answerText: widget.questionsList[index]["answers"][i]["ans"],
                   onTap: () {
-                    answerQuestion(answer);
+                    score = score +
+                            widget.questionsList[index]["answers"][i]["score"]
+                        as int;
+
+                    if (index == widget.questionsList.length - 1) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ResultScreen(
+                                  index: index,
+                                  score: score,
+                                )),
+                      );
+                    } else {
+                      setState(() {
+                        index++;
+                      });
+                    }
                   },
-                );
-              })
+                )
             ],
           ),
         ),
